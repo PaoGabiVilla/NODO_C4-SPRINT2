@@ -1,0 +1,15 @@
+
+[
+  { "id": 1, "title": "Inception", "image": "imagen_01.jpg" },
+  { "id": 2, "title": "Interstellar", "image": "imagen_02.jpg" },
+  { "id": 3, "title": "The Dark Knight", "image": "imagen_03.jpg" },
+  { "id": 4, "title": "Tenet", "image": "imagen_04.jpg" },
+  { "id": 5, "title": "Avatar", "image": "imagen_05.jpg" },
+  { "id": 6, "title": "Dune", "image": "imagen_06.jpg" },
+  { "id": 7, "title": "The Matrix", "image": "imagen_07.jpg" },
+  { "id": 8, "title": "Gladiator", "image": "imagen_08.jpg" },
+  { "id": 9, "title": "Joker", "image": "imagen_09.jpg" },
+  { "id": 10, "title": "Oppenheimer", "image": "imagen_10.jpg" },
+  { "id": 11, "title": "Avengers: Endgame", "image": "imagen_11.jpg" },
+  { "id": 12, "title": "The Batman", "image": "imagen_12.jpg" }
+]
