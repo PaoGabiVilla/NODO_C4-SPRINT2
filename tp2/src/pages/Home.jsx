@@ -1,48 +1,56 @@
-//page/Home.jsx
-import React from "react";
-import MovieCard from "../components/MovieCard";
-import movies from "../data/movies.json";
-import useWatchlist from "../hooks/useWatchlist";
+import React, { useEffect, useState } from "react";
+import Header from "../components/Header";
+import MovieList from "../components/MovieList";
+import WatchlistModal from "../components/WatchlistModal";
+import { useWatchlist } from "../hooks/useWatchlist";
 
 const Home = () => {
-  const { watchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
+  //Estados locales
+  //movies → almacena las películas cargadas desde el JSON.
+  const [movies, setMovies] = useState([]);
+  //isModalOpen → controla si el modal de la watchlist está abierto o cerrado.
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // usamos el hook personalizado
+  // watchlist → la lista actual. 
+  // addToWatchlist() → función para agregar una película. 
+  // removeFromWatchlist() → elimina una película.
+  //clearWatchlist() → vacía toda la lista.
+  const { watchlist, addToWatchlist, removeFromWatchlist, clearWatchlist } =
+    useWatchlist();
+
+  // cargamos las películas del JSON
+  useEffect(() => {
+    fetch("/data/movies.json")
+      .then((res) => res.json())
+      .then((data) => setMovies(data))
+      .catch((err) => console.error("Error cargando películas:", err));
+  }, []);
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4 text-center text-blue-600">
-        🎞️ Todas las Películas
-      </h2>
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Header con botón para ver la lista */}
+      <Header onOpenWatchlist={() => setIsModalOpen(true)} 
+        watchlistCount={watchlist.length}  
+      />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-            onAdd={addToWatchlist}
-            onRemove={removeFromWatchlist}
-            inWatchlist={watchlist.some((m) => m.id === movie.id)}
-          />
-        ))}
-      </div>
+      <main className="p-6">
+        {/* 👇 AQUÍ MovieList */}
+        <MovieList
+          movies={movies}
+          onAdd={addToWatchlist}
+          watchlist={watchlist} // ✅ le pasamos la lista actual
+        />
+      </main>
 
-      <h2 className="text-2xl font-bold mt-8 mb-4 text-center text-green-600">
-        ✅ Mi Watchlist
-      </h2>
-
-      {watchlist.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {watchlist.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              onAdd={addToWatchlist}
-              onRemove={removeFromWatchlist}
-              inWatchlist={true}
-            />
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-gray-500">Todavía no agregaste películas.</p>
+      {/* Modal para ver la Watchlist */}
+      {isModalOpen && (
+        <WatchlistModal
+          watchlist={watchlist}
+          onClose={() => setIsModalOpen(false)}
+          onRemove={removeFromWatchlist}
+          onClear={clearWatchlist}
+        />
       )}
     </div>
   );

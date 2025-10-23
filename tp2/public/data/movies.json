@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "The Shining",
+    "image": "/img/imagen_01.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Inception",
+    "image": "/img/imagen_02.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Interstellar",
+    "image": "/img/imagen_03.jpg"
+  },
+  {
+    "id": 4,
+    "title": "The Dark Knight",
+    "image": "/img/imagen_04.jpg"
+  },
+  { 
+    "id": 5, 
+    "title": "Avatar", 
+    "image": "/img/imagen_05.jpg" 
+  },
+  { 
+    "id": 6, 
+    "title": "Dune", 
+    "image": "/img/imagen_06.jpg" 
+  },
+  { 
+    "id": 7, 
+    "title": "The Matrix", 
+    "image": "/img/imagen_07.jpg" 
+  },
+  { 
+    "id": 8, 
+    "title": "Gladiator", 
+    "image": "/img/imagen_08.jpg" 
+  },
+  { 
+    "id": 9, 
+    "title": "Joker", 
+    "image": "/img/imagen_09.jpg" 
+  },
+  { 
+    "id": 10, 
+    "title": "Oppenheimer", 
+    "image": "/img/imagen_10.jpg" 
+  },
+  { 
+    "id": 11, 
+    "title": "Avengers: Endgame", 
+    "image": "/img/imagen_11.jpg" 
+  },
+  { 
+    "id": 12, 
+    "title": "The Batman", 
+    "image": "/img/imagen_12.jpg" 
+  }
+]

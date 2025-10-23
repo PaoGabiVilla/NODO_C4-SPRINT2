@@ -10,15 +10,16 @@ const WatchlistSidebar = ({ isOpen, onClose, watchlist, onRemove }) => {
       {/* Fondo oscuro */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40"
+          className="fixed inset-0 bg-black/50 z-40 pointer-events-auto"
           onClick={onClose}
         ></div>
       )}
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 md:w-96 bg-white shadow-2xl p-4 overflow-y-auto z-50 transform transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        onClick={(e) => e.stopPropagation()} // 👈 Este evita el cierre accidental
+        className={`fixed top-0 right-0 h-full w-80 md:w-96 bg-white shadow-2xl p-4 overflow-y-auto z-50 transform transition-all duration-300 ease-in-out ${
+          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}
         style={{ willChange: "transform" }}
       >
@@ -33,7 +34,6 @@ const WatchlistSidebar = ({ isOpen, onClose, watchlist, onRemove }) => {
             Cerrar
           </Button>
         </div>
-
         {watchlist.length === 0 ? (
           <p className="text-gray-600">No hay películas en tu lista todavía.</p>
         ) : (

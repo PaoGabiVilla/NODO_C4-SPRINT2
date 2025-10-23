@@ -1,25 +1,32 @@
-//hooks/useWatchlist.js
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export function useWatchlist() {
-  const [watchlist, setWatchlist] = useState(() => {
-    const saved = localStorage.getItem("watchlist");
-    return saved ? JSON.parse(saved) : [];
-  });
+export const useWatchlist = () => {
+  const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
-  }, [watchlist]);
+    const saved = JSON.parse(localStorage.getItem("watchlist")) || [];
+    setWatchlist(saved);
+  }, []);
 
-  const addMovie = (movie) => {
-    if (!watchlist.find((m) => m.id === movie.id)) {
-      setWatchlist([...watchlist, movie]);
+  const addToWatchlist = (movie) => {
+    const exists = watchlist.some((m) => m.id === movie.id);
+    if (!exists) {
+      const updated = [...watchlist, movie];
+      setWatchlist(updated);
+      localStorage.setItem("watchlist", JSON.stringify(updated));
     }
   };
 
-  const removeMovie = (id) => {
-    setWatchlist(watchlist.filter((m) => m.id !== id));
+  const removeFromWatchlist = (id) => {
+    const updated = watchlist.filter((m) => m.id !== id);
+    setWatchlist(updated);
+    localStorage.setItem("watchlist", JSON.stringify(updated));
   };
 
-  return { watchlist, addMovie, removeMovie };
-}
+  const clearWatchlist = () => {
+    setWatchlist([]);
+    localStorage.removeItem("watchlist");
+  };
+
+  return { watchlist, addToWatchlist, removeFromWatchlist, clearWatchlist};
+};
